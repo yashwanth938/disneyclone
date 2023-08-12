@@ -4,6 +4,16 @@ const Login = (props) => {
   return (
     <Container>
       <Content>
+        <CAT>
+          <CATlogoOne src="/images/cta-logo-one.svg" alt="" />
+          <SignUp>GET IT ALL THERE</SignUp>
+          <Descripton>
+            Get Premier Access to Raya and the Last Dragon for an additional fee
+            with a Disney+ subscription. As of 8/12/2023, the price of Disney+
+            and The Disney Bundle will increase by 100RS
+          </Descripton>
+          <CATlogtwo src="/images/cta-logo-two.png" alt="" />
+        </CAT>
         <BgImage />
       </Content>
     </Container>
@@ -45,4 +55,62 @@ const BgImage = styled.div`
   z-index: -1;
 `;
 
+const CAT = styled.div`
+  max-width: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+const CATlogoOne = styled.img`
+  margin-bottm: 12px;
+  max-width: 680px;
+  min-height: 1px;
+  display: block;
+  width: 100%;
+`;
+
+const SignUp = styled.a`
+  font-weight: bold;
+  color: #f9f9f9;
+  background-color: #0063e5;
+  margin-bottom: 12px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  font-size: 18px;
+  padding: 16.5px 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  &:hover {
+    background-color: #0483ee;
+  }
+`;
+
+const Descripton = styled.p`
+  color: hsla(0, 0%, 95.3%, 1);
+  font-size: 11px;
+  margin: 0 0 24px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+`;
+
+const CATlogtwo = styled.img`
+  max-width: 600px;
+  margin-bottom: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  width: 100%;
+`;
+
 export default Login;
+
+// margin-bottom: 2vw;
+//   max-width: 650px;
+//   flex-wrap: wrap;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   margin-top: 0;
+//   align-items: center;
+//   text-align: center;
+//   margin-right: auto;
+//   margin-left: auto;
