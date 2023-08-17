@@ -7,6 +7,7 @@ import {
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
+  setSignOutState,
 } from "../features/user/userSlice";
 import { useEffect } from "react";
 
@@ -25,13 +26,23 @@ const Header = (props) => {
   }, [userName]);
 
   const handleAuth = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        setUser(result.user);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    if (!userName) {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          setUser(result.user);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else if (userName) {
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          history.push("/");
+        })
+        .catch((err) => alert(err.message));
+    }
   };
 
   const setUser = (user) => {
@@ -79,7 +90,12 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src={usePhoto} alt={userName} />
+          <SignOut>
+            <UserImg src={usePhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sign Out</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav>
@@ -197,6 +213,42 @@ const Login = styled.a`
 
 const UserImg = styled.img`
   height: 100%;
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0px;
+  background: rgb(19, 19, 19);
+  border: 1px solid rgb(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 /50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 190px;
+  opacity: 0;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  ${UserImg} {
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+  }
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
 `;
 
 export default Header;
