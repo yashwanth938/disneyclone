@@ -5,6 +5,7 @@ const Home = (props) => {
   return (
     <Container>
       <ImgSlider></ImgSlider>
+      <ImgSlider></ImgSlider>
     </Container>
   );
 };
